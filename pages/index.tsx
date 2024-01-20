@@ -36,7 +36,7 @@ export default function Home() {
                 src={"/telegram.svg"}
               />
             </a>
-            <a href='https://twitter.com/JumpingbullPoly'>
+            <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
               <Image
                 height={24}
                 width={24}
@@ -57,10 +57,10 @@ export default function Home() {
           </div>
           <div className='flex items-center gap-[24px]'>
             <Image
-              src={"/star.svg"}
+              src={"/polygon-matic-icon.svg"}
               height={55}
               width={49}
-              className='sm:h-[25px] sm:w-[22px]'
+              className='sm:h-[25px] sm:w-[22px] rotate-[120deg]'
               alt=''
             />
             <p>jumping bull or</p>
@@ -90,7 +90,7 @@ export default function Home() {
                 width={24}
                 alt='dextool'
                 className='w-[24px] h-[24px]'
-                src={"/dextool.svg"}
+                src={"/dextool-light.svg"}
               />
             </a>
             <a href='https://t.me/jumpingbullpoly' target='_blank'>
@@ -99,16 +99,16 @@ export default function Home() {
                 width={24}
                 alt='telegram'
                 className='w-[24px] h-[24px]'
-                src={"/telegram.svg"}
+                src={"/telegram-light.svg"}
               />
             </a>
-            <a href='https://twitter.com/JumpingbullPoly'>
+            <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
               <Image
                 height={24}
                 width={24}
                 alt='twitter'
                 className='w-[24px] h-[24px]'
-                src={"/x-twitter.svg"}
+                src={"/x-twitter-light.svg"}
               />
             </a>
           </div>
