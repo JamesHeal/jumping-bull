@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className='w-full flex items-center justify-center flex-col bg-[linear-gradient(#8a46ff,#6e38cc)]'>
+    <div className='w-full flex items-center justify-center flex-col bg-[linear-gradient(#8a46ff,70%,#000)]'>
       <div className='max-w-[1260px] w-[90%] my-[32px]'>
         <div className='p-[1rem] flex items-center justify-between h-[5.125rem] sm:h-[3.875rem] border border-solid rounded-[2.5625rem] border-gray-300'>
           <div className='flex items-center'>
@@ -14,7 +14,7 @@ export default function Home() {
               className='h-[4rem] w-[4rem] sm:h-[24px] sm:w-[24px]'
             />
             <span className='text-[2rem] mt-[4px] sm:text-[14px]'>
-              JUMPINGBULL
+              JUMPING BULL
             </span>
           </div>
           <div className='flex items-center gap-[24px] sm:gap-[16px]'>
@@ -82,7 +82,7 @@ export default function Home() {
           />
         </div>
         <div className='flex flex-col sm:mt-[128px] gap-[16px] items-center'>
-          <p className='text-[2rem]'>JUMPINGBULL</p>
+          <p className='text-[2rem] text-gray-400'>JUMPING BULL</p>
           <div className='flex items-center gap-[24px]'>
             <a href='https://www.dextools.io/app/' target='_blank'>
               <Image
@@ -113,7 +113,7 @@ export default function Home() {
             </a>
           </div>
           <p className='mt-[6.25rem] sm:mt-[48px] sm:text-[12px] text-gray-400 text-[16px]'>
-            Copyright 2024 | JUMPINGBULL
+            Copyright 2024 | JUMPING BULL
           </p>
         </div>
       </div>
