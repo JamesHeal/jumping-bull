@@ -18,7 +18,10 @@ export default function Home() {
             </span>
           </div>
           <div className='flex items-center gap-[24px] sm:gap-[16px]'>
-            <a href='https://www.dextools.io/app/' target='_blank'>
+            <a
+              href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
+              target='_blank'
+            >
               <Image
                 height={24}
                 width={24}
@@ -46,9 +49,13 @@ export default function Home() {
               />
             </a>
 
-            <button className='sm:hidden text-white w-[8.75rem] rounded-[2.5625rem] py-[12px] px-[24px] bg-black'>
+            <a
+              target='_blank'
+              href='https://ave.ai/token/0x3c5b3938010bd301300811d486465180e5dec887-polygon?from=Default'
+              className='flex items-center justify-center sm:hidden text-white w-[8.75rem] rounded-[2.5625rem] py-[12px] px-[24px] bg-black'
+            >
               buy
-            </button>
+            </a>
           </div>
         </div>
         <div className='w-full relative min-h-[56.25rem] sm:min-h-[unset] mt-[8.75rem] flex flex-col text-[42px] sm:text-[18px] sm:mt-[2.5rem]'>
@@ -84,7 +91,10 @@ export default function Home() {
         <div className='flex flex-col sm:mt-[128px] gap-[16px] items-center'>
           <p className='text-[2rem] text-gray-400'>JUMPING BULL</p>
           <div className='flex items-center gap-[24px]'>
-            <a href='https://www.dextools.io/app/' target='_blank'>
+            <a
+              href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
+              target='_blank'
+            >
               <Image
                 height={24}
                 width={24}
