@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className='w-full flex items-center justify-center flex-col bg-[linear-gradient(#8a46ff,70%,#000)]'>
-      <div className='p-[16px] w-full sm:p-[8px] text-[12px] flex items-center justify-center bg-black text-white'>
+      {/* <div className='p-[16px] w-full sm:p-[8px] text-[12px] flex items-center justify-center bg-black text-white'>
         We&apos;ve opened a new Twitter account and will keep contacting the
         Twitter Help Centre regarding the old one.
-      </div>
+      </div> */}
       <div className='max-w-[1260px] w-[90%] my-[32px]'>
         <div className='p-[1rem] flex items-center justify-between h-[5.125rem] sm:h-[3.875rem] border border-solid rounded-[2.5625rem] border-gray-300'>
           <div className='flex items-center'>
@@ -43,7 +43,7 @@ export default function Home() {
                 src={"/telegram.svg"}
               />
             </a>
-            <a href='https://twitter.com/jumping_bull' target='_blank'>
+            <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
               <Image
                 height={24}
                 width={24}
@@ -118,7 +118,7 @@ export default function Home() {
                 src={"/telegram-light.svg"}
               />
             </a>
-            <a href='https://twitter.com/jumping_bull' target='_blank'>
+            <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
               <Image
                 height={24}
                 width={24}
