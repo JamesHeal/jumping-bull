@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -55,7 +54,7 @@ export default function Home() {
   }, []);
   return (
     <div className='w-full flex flex-col relative h-[200vh]'>
-      <Image
+      <img
         alt='dark bull background'
         src='/red-eye.png'
         width={1920}
@@ -67,7 +66,7 @@ export default function Home() {
       />
       <div className=''></div>
       <div></div>
-      <Image
+      <img
         alt='dark bull background'
         src='/dark-bull-white-bg.webp'
         width={1920}
@@ -92,7 +91,7 @@ export default function Home() {
               target='_blank'
               className='rounded-full p-[4px] bg-white'
             >
-              <Image
+              <img
                 height={24}
                 width={24}
                 alt='dextool'
@@ -105,7 +104,7 @@ export default function Home() {
               target='_blank'
               className='rounded-full p-[4px] bg-white'
             >
-              <Image
+              <img
                 height={24}
                 width={24}
                 alt='telegram'
@@ -118,7 +117,7 @@ export default function Home() {
               target='_blank'
               className='rounded-full p-[4px] bg-white'
             >
-              <Image
+              <img
                 height={24}
                 width={24}
                 alt='twitter'
@@ -137,7 +136,7 @@ export default function Home() {
             <div className='h-full relative'>
               {!playing && (
                 <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
-                  <Image
+                  <img
                     src={"/play.svg"}
                     height={50}
                     width={50}
