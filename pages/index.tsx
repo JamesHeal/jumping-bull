@@ -1,149 +1,218 @@
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const [todyRemain, setTodayRemain] = useState(0);
+  const remainDay = Math.floor(todyRemain / (1000 * 60 * 60 * 24));
+  const remainHour = Math.floor(
+    (todyRemain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const remainMinute = Math.floor(
+    (todyRemain % (1000 * 60 * 60)) / (1000 * 60)
+  );
+  const remainSecond = Math.floor((todyRemain % (1000 * 60)) / 1000);
+  const [playing, setIsPlaying] = useState(false);
+  const onPlayClick = () => {
+    const video = document.getElementById("countDownVideo") as HTMLVideoElement;
+    video.requestFullscreen().then(() => {
+      video.play();
+      setIsPlaying(true);
+    });
+  };
+  const tickerRef = useRef(0);
+  useEffect(() => {
+    const countDown = setInterval(() => {
+      const now = new Date();
+      const end = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        23,
+        59,
+        59
+      );
+      const remain = end.getTime() - now.getTime();
+      setTodayRemain(remain);
+      tickerRef.current += 1;
+    }, 1000);
+    return () => {
+      clearInterval(countDown);
+    };
+  }, []);
+  useEffect(() => {
+    const observe = new IntersectionObserver(
+      (entries) => {
+        const mediaLinks = document.getElementById("mediaLinks");
+        if (entries[0].intersectionRatio > 0) {
+          if (mediaLinks) mediaLinks.style.opacity = "0";
+        } else {
+          if (mediaLinks) mediaLinks.style.opacity = "1";
+        }
+      },
+      { rootMargin: "10px" }
+    );
+    observe.observe(document.getElementById("secondScreen") as Element);
+  }, []);
   return (
-    <>
-      <div
-        onScroll={(e) => e.stopPropagation()}
-        onClick={(e) => e.stopPropagation()}
-        className='z-10 fixed w-full h-full flex items-center justify-center backdrop-blur-[20px] bg-black/20'
-      >
-        <div className='w-[400px] flex items-center justify-center p-[24px] rounded-[12px] bg-black text-white'>
-          The website is under maintenance and we will be back soon.
-        </div>
-      </div>
-      <div className='w-full h-[100vh] overflow-hidden flex items-center justify-start flex-col bg-[linear-gradient(#8a46ff,70%,#000)]'>
-        {/* <div className='p-[16px] w-full sm:p-[8px] text-[12px] flex items-center justify-center bg-black text-white'>
-        We&apos;ve opened a new Twitter account and will keep contacting the
-        Twitter Help Centre regarding the old one.
-      </div> */}
-        <div className='max-w-[1260px] w-[90%] my-[32px]'>
-          <div className='p-[1rem] flex items-center justify-between h-[5.125rem] sm:h-[3.875rem] border border-solid rounded-[2.5625rem] border-gray-300'>
-            <div className='flex items-center'>
+    <div className='w-full flex flex-col relative h-[200vh]'>
+      <Image
+        alt='dark bull background'
+        src='/red-eye.png'
+        width={1920}
+        height={2160}
+        style={{
+          opacity: tickerRef.current % 3 === 0 ? 0 : 1,
+        }}
+        className='h-full z-[2] absolute transition-opacity duration-1000 w-full top-0 left-0 object-cover'
+      />
+      <div className=''></div>
+      <div></div>
+      <Image
+        alt='dark bull background'
+        src='/dark-bull-white-bg.webp'
+        width={1920}
+        height={2160}
+        className='h-full z-[1] absolute w-full top-0 left-0 object-cover'
+      />
+      <div className='flex relative items-end z-[3] w-full h-[100vh] pb-[340px]'>
+        <div
+          id='mediaLinks'
+          className='transition-all duration-300 ease-out w-full flex gap-[16px] absolute bottom-[16px] left-[24px] z-[3]'
+        >
+          <a
+            target='_blank'
+            href='https://ave.ai/token/0x3c5b3938010bd301300811d486465180e5dec887-polygon?from=Default'
+            className='flex items-center justify-center sm:hidden text-black w-[8.5rem] rounded-[2.5625rem] py-[12px] px-[24px] bg-white'
+          >
+            Buy
+          </a>
+          <div className='flex items-center gap-[24px] sm:gap-[16px]'>
+            <a
+              href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
+              target='_blank'
+              className='rounded-full p-[4px] bg-white'
+            >
               <Image
-                src='/logo.png'
-                alt='logo'
-                height={56}
-                width={56}
-                className='h-[4rem] w-[4rem] sm:h-[24px] sm:w-[24px]'
+                height={24}
+                width={24}
+                alt='dextool'
+                className='sm:w-[16px] sm:h-[16px]'
+                src={"/dextool.svg"}
               />
-              <span className='text-[2rem] mt-[4px] sm:text-[14px]'>
-                JUMPING BULL
-              </span>
-            </div>
-            <div className='flex items-center gap-[24px] sm:gap-[16px]'>
-              <a
-                href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
-                target='_blank'
-              >
-                <Image
-                  height={24}
-                  width={24}
-                  alt='dextool'
-                  className='sm:w-[16px] sm:h-[16px]'
-                  src={"/dextool.svg"}
-                />
-              </a>
-              <a href='https://t.me/jumpingbullpoly' target='_blank'>
-                <Image
-                  height={24}
-                  width={24}
-                  alt='telegram'
-                  className='sm:w-[16px] sm:h-[16px]'
-                  src={"/telegram.svg"}
-                />
-              </a>
-              <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
-                <Image
-                  height={24}
-                  width={24}
-                  alt='twitter'
-                  className='sm:w-[16px] sm:h-[16px]'
-                  src={"/x-twitter.svg"}
-                />
-              </a>
+            </a>
+            <a
+              href='https://t.me/jumpingbullpoly'
+              target='_blank'
+              className='rounded-full p-[4px] bg-white'
+            >
+              <Image
+                height={24}
+                width={24}
+                alt='telegram'
+                className='sm:w-[16px] sm:h-[16px]'
+                src={"/telegram.svg"}
+              />
+            </a>
+            <a
+              href='https://twitter.com/JumpingbullPoly'
+              target='_blank'
+              className='rounded-full p-[4px] bg-white'
+            >
+              <Image
+                height={24}
+                width={24}
+                alt='twitter'
+                className='sm:w-[16px] sm:h-[16px]'
+                src={"/x-twitter.svg"}
+              />
+            </a>
+          </div>
+        </div>
+        <div className='relative flex items-center gap-[32px] justify-center w-full overflow-visible'>
+          <CountDownCell remain={remainDay} unit='DAYS' />
+          <CountDownCell remain={remainHour} unit='HOURS' />
+          <CountDownCell remain={remainMinute} unit='MINUTES' />
+          <CountDownCell remain={remainSecond} unit='SECONDS' />
+          <div className='h-[165px] absolute right-0'>
+            <div className='h-full relative'>
+              {!playing && (
+                <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
+                  <Image
+                    src={"/play.svg"}
+                    height={50}
+                    width={50}
+                    alt='play button'
+                    className='cursor-pointer z-10'
+                    onClick={onPlayClick}
+                  />
+                </div>
+              )}
 
-              <a
-                target='_blank'
-                href='https://ave.ai/token/0x3c5b3938010bd301300811d486465180e5dec887-polygon?from=Default'
-                className='flex items-center justify-center sm:hidden text-white w-[8.75rem] rounded-[2.5625rem] py-[12px] px-[24px] bg-black'
-              >
-                buy
-              </a>
-            </div>
-          </div>
-          <div className='w-full relative min-h-[56.25rem] sm:min-h-[unset] mt-[8.75rem] flex flex-col text-[42px] sm:text-[18px] sm:mt-[2.5rem]'>
-            <div className='flex items-center gap-[24px]'>
-              <p>Take a ride on the</p>
-            </div>
-            <div className='flex items-center gap-[24px]'>
-              <Image
-                src={"/polygon-matic-icon.svg"}
-                height={55}
-                width={49}
-                className='sm:h-[25px] sm:w-[22px] rotate-[120deg]'
-                alt=''
+              <video
+                className='h-full'
+                id='countDownVideo'
+                src='/count-down.mp4'
+                onEnded={() => {
+                  if (document.fullscreenElement) document.exitFullscreen();
+                  setIsPlaying(false);
+                }}
+                poster='/count-down-post.png'
               />
-              <p>jumping bull or</p>
             </div>
-            <p className='whitespace-pre'>create one yourself</p>
-            <Image
-              className='absolute sm:hidden right-0 top-0'
-              width={39}
-              height={65}
-              src={"/vector.svg"}
-              alt=''
-            />
-            <Image
-              className='absolute sm:static sm:mt-[64px] right-0 top-[6.25rem]'
-              width={524}
-              height={630}
-              src={"/bg.png"}
-              alt=''
-            />
-          </div>
-          <div className='flex flex-col sm:mt-[128px] gap-[16px] items-center'>
-            <p className='text-[2rem] whitespace-pre text-gray-400'>
-              JUMPING BULL
-            </p>
-            <div className='flex items-center gap-[24px]'>
-              <a
-                href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
-                target='_blank'
-              >
-                <Image
-                  height={24}
-                  width={24}
-                  alt='dextool'
-                  className='w-[24px] h-[24px]'
-                  src={"/dextool-light.svg"}
-                />
-              </a>
-              <a href='https://t.me/jumpingbullpoly' target='_blank'>
-                <Image
-                  height={24}
-                  width={24}
-                  alt='telegram'
-                  className='w-[24px] h-[24px]'
-                  src={"/telegram-light.svg"}
-                />
-              </a>
-              <a href='https://twitter.com/JumpingbullPoly' target='_blank'>
-                <Image
-                  height={24}
-                  width={24}
-                  alt='twitter'
-                  className='w-[24px] h-[24px]'
-                  src={"/x-twitter-light.svg"}
-                />
-              </a>
-            </div>
-            <p className='whitespace-pre mt-[6.25rem] sm:mt-[48px] sm:text-[12px] text-gray-400 text-[16px]'>
-              Copyright 2024 | JUMPING BULL
-            </p>
           </div>
         </div>
       </div>
-    </>
+      <div className='z-[3] w-full h-[100vh] flex flex-col items-center'>
+        <div
+          id='secondScreen'
+          className='bg-[#e51249]/[0.25] mt-[100px] rounded-[20px] flex items-center justify-center h-[300px] w-[988px]'
+        >
+          <div className='flex flex-col'>
+            <div className='text-[30px] leading-[45px] text-white'>
+              Total number of Jumpins:
+            </div>
+            <div className='text-[30px] leading-[45px] text-white'>
+              Number of Jumpins burned today:
+            </div>
+            <div className='text-[30px] leading-[45px] text-white'>
+              Number of Jumpins burned in total:
+            </div>
+            <div className='text-[30px] leading-[45px] text-white'>
+              Polygon official token burning address:
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='z-[2] absolute bottom-0 text-[16px] left-0 w-full bg-black/30 h-[287px] flex items-center justify-center text-white px-[50px] sm:px-[16px]'>
+        <span>
+          Warning:
+          <br />
+          Jumping Bull is a meme coin game produced by Mevels Entertainment, and
+          it&apos;s available on the Polygon network. There is no investment
+          advise. This token is meant only for amusement and education purpose.
+          THE FOUNDING TEAMs disclaim all liability for any losses or damages.
+          Invest at your own risk as the market is volatile. Zero Guarantee of
+          profit or retention of value.You should do your own research before
+          investing and you agree to the risks by buying. The Production Company
+          are not required to update information. Observe local regulations as
+          laws vary based on jurisdiction. Mevels Entertainment retains the
+          final interpretation right for this project.
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function CountDownCell({ remain, unit }: { remain: number; unit: string }) {
+  return (
+    <div className='flex flex-col items-center'>
+      <span
+        className='text-[#e51249] text-[120px] leading-[1] w-[145px]'
+        style={{ textShadow: "0 0 0.2em #e51249" }}
+      >
+        {remain >= 10 ? remain : `0${remain}`}
+      </span>
+      <span className='text-[30px] text-white'>{unit}</span>
+    </div>
   );
 }

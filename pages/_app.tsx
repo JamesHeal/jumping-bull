@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel='icon' href='/logo.png' type='image/x-icon' />
+        <meta name='viewport' content='user-scalable=yes' />
       </Head>
       <Component {...pageProps} />
     </>
