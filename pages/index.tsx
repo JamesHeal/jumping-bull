@@ -27,7 +27,7 @@ export default function Home() {
     const offset = new Date().getTimezoneOffset() * 60 * 1000;
     const countDown = setInterval(() => {
       const now = new Date();
-      const end = new Date(`2024-3-${now.getUTCDate() + 1} 13:00:00Z`);
+      const end = new Date(`2024-3-${now.getUTCDate() + 1} 14:00:00Z`);
       const remain = end.getTime() - now.getTime();
       setTodayRemain(remain);
       tickerRef.current += 1;
@@ -164,12 +164,15 @@ export default function Home() {
           id='secondScreen'
           className='relative mt-[100px] overflow-hidden rounded-[20px] flex items-center justify-center h-[300px] w-[988px]'
         >
-          <div className='absolute w-full h-full z-[2] left-0 top-0 bg-[#e51249]/[0.1] backdrop-blur-[10px] '></div>
+          <div className='absolute w-full h-full z-[2] left-0 top-0 bg-[#e51249]/[0.05] backdrop-blur-[20px] '></div>
           <div className='w-full z-[1] h-full absolute top-0 left-0'>
-            <img
-              src='/fire.gif'
-              className='h-full w-full object-cover '
-              alt='fire'
+            <video
+              src='/fire.mp4'
+              className='h-full w-full object-cover'
+              muted
+              autoPlay
+              loop
+              poster='/fire.png'
             />
           </div>
           <div className='flex flex-col z-[3]'>
