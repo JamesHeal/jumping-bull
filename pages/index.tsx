@@ -1,5 +1,9 @@
+import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-
+const totalJumpins = 0;
+const nextJumpins = 100000000000;
+const burnedJumpinsToday = 0;
+const totalBurnedJumpins = 0;
 export default function Home() {
   const [todyRemain, setTodayRemain] = useState(0);
   const remainDay = Math.floor(todyRemain / (1000 * 60 * 60 * 24));
@@ -20,16 +24,10 @@ export default function Home() {
   };
   const tickerRef = useRef(0);
   useEffect(() => {
+    const offset = new Date().getTimezoneOffset() * 60 * 1000;
     const countDown = setInterval(() => {
       const now = new Date();
-      const end = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        23,
-        59,
-        59
-      );
+      const end = new Date(`2024-3-${now.getUTCDate() + 1} 13:00:00Z`);
       const remain = end.getTime() - now.getTime();
       setTodayRemain(remain);
       tickerRef.current += 1;
@@ -164,20 +162,34 @@ export default function Home() {
       <div className='z-[3] w-full h-[100vh] flex flex-col items-center'>
         <div
           id='secondScreen'
-          className='bg-[#e51249]/[0.25] mt-[100px] rounded-[20px] flex items-center justify-center h-[300px] w-[988px]'
+          className='relative mt-[100px] overflow-hidden rounded-[20px] flex items-center justify-center h-[300px] w-[988px]'
         >
-          <div className='flex flex-col'>
-            <div className='text-[30px] leading-[45px] text-white'>
-              Total number of Jumpins:
+          <div className='absolute w-full h-full z-[2] left-0 top-0 bg-[#e51249]/[0.1] backdrop-blur-[10px] '></div>
+          <div className='w-full z-[1] h-full absolute top-0 left-0'>
+            <img
+              src='/fire.gif'
+              className='h-full w-full object-cover '
+              alt='fire'
+            />
+          </div>
+          <div className='flex flex-col z-[3]'>
+            <div className='text-[24px] leading-[45px] text-white'>
+              Total number of Jumpins:{" "}
+              <RollingNumber from={totalJumpins} to={nextJumpins} />
             </div>
-            <div className='text-[30px] leading-[45px] text-white'>
-              Number of Jumpins burned today:
+            <div className='text-[24px] leading-[45px] text-white'>
+              Number of Jumpins burned today:{" "}
+              <RollingNumber to={burnedJumpinsToday} />
             </div>
-            <div className='text-[30px] leading-[45px] text-white'>
-              Number of Jumpins burned in total:
+            <div className='text-[24px] leading-[45px] text-white'>
+              Number of Jumpins burned in total:{" "}
+              <RollingNumber to={totalBurnedJumpins} />
             </div>
-            <div className='text-[30px] leading-[45px] text-white'>
-              Polygon official token burning address:
+            <div className='text-[24px] leading-[45px] text-white'>
+              Polygon official token burning address:&nbsp;
+              <span className='text-[18px]'>
+                0x3333333333333333333333333333333333333333
+              </span>
             </div>
           </div>
         </div>
@@ -214,4 +226,58 @@ function CountDownCell({ remain, unit }: { remain: number; unit: string }) {
       <span className='text-[30px] text-white'>{unit}</span>
     </div>
   );
+}
+
+function RollingNumber({ from = 0, to }: { from?: number; to: number }) {
+  const nodeRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    let controls: any;
+    if (node) {
+      const observe = new IntersectionObserver(
+        (entries) => {
+          const mediaLinks = document.getElementById("mediaLinks");
+          if (entries[0].intersectionRatio > 0) {
+            controls = animate(from, to, {
+              duration: 1,
+              onUpdate(value) {
+                if (node) {
+                  node.innerHTML = toThousandNum(value);
+                }
+              },
+            });
+          }
+        },
+        { rootMargin: "10px" }
+      );
+      observe.observe(node);
+    }
+
+    return () => {
+      if (controls) controls.stop();
+    };
+  }, [from, to]);
+
+  return <span ref={nodeRef}>{toThousandNum(to)}</span>;
+}
+
+function toThousandNum(num: unknown, precision = 0, padZero = true) {
+  if (typeof num !== "number") {
+    return "--";
+  }
+  const isNegative = num < 0;
+  const absNum = Math.abs(num);
+  const numFixed =
+    Math.round(absNum * Math.pow(10, precision)) / Math.pow(10, precision);
+  const intNum = Math.floor(numFixed);
+  const intNumStr = (intNum || 0)
+    .toString()
+    .replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+  const restStr = padZero
+    ? (numFixed || 0).toFixed(precision).match(/\.(.*)$/g)
+    : (numFixed || 0).toString().match(/\.(.*)$/g);
+  return `${isNegative ? "-" : ""}${intNumStr}${
+    restStr && precision !== 0 ? restStr[0] : ""
+  }`;
 }
