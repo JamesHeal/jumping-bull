@@ -74,7 +74,7 @@ export default function Home() {
         >
           <a
             target='_blank'
-            href='https://ave.ai/token/0x3c5b3938010bd301300811d486465180e5dec887-polygon?from=Default'
+            href='https://www.dextools.io/app/en/polygon/pair-explorer/0x93847908bda4eef8c1f2b16bd486fa1349f7ce88'
             className='flex items-center justify-center sm:hidden text-black w-[8.5rem] rounded-[2.5625rem] py-[12px] px-[24px] bg-white'
           >
             Buy
