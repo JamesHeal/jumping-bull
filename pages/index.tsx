@@ -17,10 +17,8 @@ export default function Home() {
   const [playing, setIsPlaying] = useState(false);
   const onPlayClick = () => {
     const video = document.getElementById("countDownVideo") as HTMLVideoElement;
-    video.requestFullscreen().then(() => {
-      video.play();
-      setIsPlaying(true);
-    });
+    video.play();
+    setIsPlaying(true);
   };
   const tickerRef = useRef(0);
   useEffect(() => {
@@ -62,8 +60,6 @@ export default function Home() {
         }}
         className='h-full z-[2] absolute transition-opacity duration-1000 w-full top-0 left-0 object-cover'
       />
-      <div className=''></div>
-      <div></div>
       <img
         alt='dark bull background'
         src='/dark-bull-white-bg.webp'
@@ -125,38 +121,38 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <div className='h-[165px] absolute right-[24px] bottom-[16px]'>
+          <div className='h-full relative'>
+            {!playing && (
+              <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
+                <img
+                  src={"/play.svg"}
+                  height={50}
+                  width={50}
+                  alt='play button'
+                  className='cursor-pointer z-10'
+                  onClick={onPlayClick}
+                />
+              </div>
+            )}
+
+            <video
+              className='h-full'
+              id='countDownVideo'
+              src='/count-down.mp4'
+              controls={playing}
+              onEnded={() => {
+                setIsPlaying(false);
+              }}
+              poster='/count-down-post.png'
+            />
+          </div>
+        </div>
         <div className='relative flex items-center gap-[32px] justify-center w-full overflow-visible'>
           <CountDownCell remain={remainDay} unit='DAYS' />
           <CountDownCell remain={remainHour} unit='HOURS' />
           <CountDownCell remain={remainMinute} unit='MINUTES' />
           <CountDownCell remain={remainSecond} unit='SECONDS' />
-          <div className='h-[165px] absolute right-0'>
-            <div className='h-full relative'>
-              {!playing && (
-                <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
-                  <img
-                    src={"/play.svg"}
-                    height={50}
-                    width={50}
-                    alt='play button'
-                    className='cursor-pointer z-10'
-                    onClick={onPlayClick}
-                  />
-                </div>
-              )}
-
-              <video
-                className='h-full'
-                id='countDownVideo'
-                src='/count-down.mp4'
-                onEnded={() => {
-                  if (document.fullscreenElement) document.exitFullscreen();
-                  setIsPlaying(false);
-                }}
-                poster='/count-down-post.png'
-              />
-            </div>
-          </div>
         </div>
       </div>
       <div className='z-[3] w-full h-[100vh] flex flex-col items-center'>
