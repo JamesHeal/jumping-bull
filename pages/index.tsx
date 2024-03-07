@@ -6,7 +6,7 @@ const burnedJumpinsToday = 0;
 const totalBurnedJumpins = 0;
 export default function Home() {
   const [todyRemain, setTodayRemain] = useState(0);
-  const remainDay = Math.floor(todyRemain / (1000 * 60 * 60 * 24));
+  const remainDay = 0;
   const remainHour = Math.floor(
     (todyRemain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
   );
