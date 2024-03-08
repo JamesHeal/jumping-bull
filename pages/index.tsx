@@ -2,8 +2,8 @@ import { animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 const totalJumpins = 0;
 const nextJumpins = 100000000000;
-const burnedJumpinsToday = 5110043541;
-const totalBurnedJumpins = 5110043541;
+const burnedJumpinsToday = 5135635889;
+const totalBurnedJumpins = 10245679430;
 export default function Home() {
   const [todyRemain, setTodayRemain] = useState(0);
   const remainDay = 0;
