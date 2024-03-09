@@ -1,9 +1,10 @@
 import { animate } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 const totalJumpins = 0;
 const nextJumpins = 100000000000;
-const burnedJumpinsToday = 5135635889;
-const totalBurnedJumpins = 10245679430;
+const burnedJumpinsToday = 5002850100;
+const totalBurnedJumpins = 15248529530;
 export default function Home() {
   const [todyRemain, setTodayRemain] = useState(0);
   const remainDay = 0;
@@ -49,8 +50,8 @@ export default function Home() {
     observe.observe(document.getElementById("secondScreen") as Element);
   }, []);
   return (
-    <div className='w-full flex flex-col relative h-[200vh]'>
-      <img
+    <div className='w-full flex flex-col relative h-[200vh] sm:h-[unset] sm:px-[16px]'>
+      <Image
         alt='dark bull background'
         src='/red-eye.png'
         width={1920}
@@ -58,19 +59,26 @@ export default function Home() {
         style={{
           opacity: tickerRef.current % 3 === 0 ? 0 : 1,
         }}
-        className='h-full z-[2] absolute transition-opacity duration-1000 w-full top-0 left-0 object-cover'
+        className='h-full z-[2] sm:hidden absolute transition-opacity duration-1000 w-full top-0 left-0 object-cover'
       />
-      <img
+      <Image
         alt='dark bull background'
         src='/dark-bull-white-bg.webp'
         width={1920}
         height={2160}
-        className='h-full z-[1] absolute w-full top-0 left-0 object-cover'
+        className='h-full z-[1] sm:hidden absolute w-full top-0 left-0 object-cover'
       />
-      <div className='flex relative items-end z-[3] w-full h-[100vh] pb-[340px]'>
+      <Image
+        alt='dark bull background mobile'
+        src='/dark-bull-bg-mobile.webp'
+        width={375}
+        height={1205}
+        className='h-full z-[1] hidden sm:block absolute w-full top-0 left-0 object-fill'
+      />
+      <div className='flex relative items-end z-[3] w-full h-[100vh] pb-[340px] sm:flex-col sm:items-center sm:flex-shrink-0 sm:justify-end sm:pb-[60px] min-h-0'>
         <div
           id='mediaLinks'
-          className='transition-all duration-300 ease-out w-full flex gap-[16px] absolute bottom-[16px] left-[24px] z-[3]'
+          className='sm:hidden transition-all duration-300 ease-out w-full flex gap-[16px] absolute bottom-[16px] left-[24px] z-[3]'
         >
           <a
             target='_blank'
@@ -121,7 +129,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <div className='h-[165px] absolute right-[24px] bottom-[16px]'>
+        <div className='h-[165px] absolute sm:hidden right-[24px] sm:right-0 sm:left-0 bottom-[16px]'>
           <div className='h-full relative'>
             {!playing && (
               <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
@@ -154,11 +162,38 @@ export default function Home() {
           <CountDownCell remain={remainMinute} unit='MINUTES' />
           <CountDownCell remain={remainSecond} unit='SECONDS' />
         </div>
+        <div className='h-[165px] w-full min-w-0 hidden sm:flex sm:mt-[100px]'>
+          <div className='h-full relative'>
+            {!playing && (
+              <div className='absolute h-full w-full flex items-center justify-center bg-black/40'>
+                <img
+                  src={"/play.svg"}
+                  height={50}
+                  width={50}
+                  alt='play button'
+                  className='cursor-pointer z-10'
+                  onClick={onPlayClick}
+                />
+              </div>
+            )}
+
+            <video
+              className='h-full'
+              id='countDownVideo'
+              src='/count-down.mp4'
+              controls={playing}
+              onEnded={() => {
+                setIsPlaying(false);
+              }}
+              poster='/count-down-post.png'
+            />
+          </div>
+        </div>
       </div>
-      <div className='z-[3] w-full h-[100vh] flex flex-col items-center'>
+      <div className='z-[3] w-full h-[100vh] sm:h-[unset] flex flex-col items-center'>
         <div
           id='secondScreen'
-          className='relative mt-[100px] overflow-hidden rounded-[20px] flex items-center justify-center h-[300px] w-[988px]'
+          className='relative mt-[100px] overflow-hidden rounded-[20px] flex items-center justify-center h-[300px] w-[988px] sm:w-full'
         >
           <div className='absolute w-full h-full z-[2] left-0 top-0 bg-[#e51249]/[0.05] backdrop-blur-[20px] '></div>
           <div className='w-full z-[1] h-full absolute top-0 left-0'>
@@ -171,29 +206,29 @@ export default function Home() {
               poster='/fire.png'
             />
           </div>
-          <div className='flex flex-col z-[3]'>
-            <div className='text-[24px] leading-[45px] text-white'>
+          <div className='flex flex-col z-[3] sm:w-[300px]'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
               Total number of Jumpins:{" "}
               <RollingNumber from={totalJumpins} to={nextJumpins} />
             </div>
-            <div className='text-[24px] leading-[45px] text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
               Number of Jumpins burned today:{" "}
               <RollingNumber to={burnedJumpinsToday} />
             </div>
-            <div className='text-[24px] leading-[45px] text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
               Number of Jumpins burned in total:{" "}
               <RollingNumber to={totalBurnedJumpins} />
             </div>
-            <div className='text-[24px] leading-[45px] text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 text-white'>
               Polygon official token burning address:&nbsp;
-              <span className='text-[18px]'>
+              <span className='text-[18px] sm:text-[12px] break-all'>
                 0x3333333333333333333333333333333333333333
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div className='z-[2] absolute bottom-0 text-[16px] left-0 w-full bg-black/30 h-[287px] flex items-center justify-center text-white px-[50px] sm:px-[16px]'>
+      <div className='z-[2] absolute bottom-0 text-[16px] left-0 w-full bg-black/30 h-[287px] flex items-center justify-center text-white px-[50px] sm:px-[16px] sm:pb-[64px] sm:h-[unset] sm:static sm:mt-[100px]'>
         <span>
           Warning:
           <br />
@@ -217,12 +252,12 @@ function CountDownCell({ remain, unit }: { remain: number; unit: string }) {
   return (
     <div className='flex flex-col items-center'>
       <span
-        className='text-[#e51249] text-[120px] leading-[1] w-[145px]'
+        className='text-[#e51249] text-[120px] sm:text-[60px] sm:w-[60px] leading-[1] w-[145px]'
         style={{ textShadow: "0 0 0.2em #e51249" }}
       >
         {remain >= 10 ? remain : `0${remain}`}
       </span>
-      <span className='text-[30px] text-white'>{unit}</span>
+      <span className='text-[30px] text-white sm:text-[16px]'>{unit}</span>
     </div>
   );
 }
