@@ -207,19 +207,19 @@ export default function Home() {
             />
           </div>
           <div className='flex flex-col z-[3] sm:w-[300px]'>
-            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-[28px] whitespace-pre text-white'>
               Total number of Jumpins:{" "}
               <RollingNumber from={totalJumpins} to={nextJumpins} />
             </div>
-            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-[28px] text-white'>
               Number of Jumpins burned today:{" "}
               <RollingNumber to={burnedJumpinsToday} />
             </div>
-            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 whitespace-pre text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-[28px] text-white'>
               Number of Jumpins burned in total:{" "}
               <RollingNumber to={totalBurnedJumpins} />
             </div>
-            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-1 text-white'>
+            <div className='text-[24px] leading-[45px] sm:text-[14px] sm:leading-[28px] text-white'>
               Polygon official token burning address:&nbsp;
               <span className='text-[18px] sm:text-[12px] break-all'>
                 0x3333333333333333333333333333333333333333
