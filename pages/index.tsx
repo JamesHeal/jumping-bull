@@ -26,7 +26,7 @@ export default function Home() {
     const offset = new Date().getTimezoneOffset() * 60 * 1000;
     const countDown = setInterval(() => {
       const now = new Date();
-      const end = new Date(`2024-3-${now.getUTCDate() + 1} 14:00:00Z`);
+      const end = new Date(`2024-03-${now.getUTCDate() + 1} 14:00:00Z`);
       const remain = end.getTime() - now.getTime();
       setTodayRemain(remain);
       tickerRef.current += 1;
