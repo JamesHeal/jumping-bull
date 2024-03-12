@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 const totalJumpins = 0;
 const nextJumpins = 100000000000;
-const burnedJumpinsToday = 5016465375;
-const totalBurnedJumpins = 25277436300;
+const burnedJumpinsToday = 5006492443;
+const totalBurnedJumpins = 30283928743;
 export default function Home() {
   const [todyRemain, setTodayRemain] = useState(0);
   const remainDay = 0;
